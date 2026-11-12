@@ -11,7 +11,7 @@ class Poker:
         self.dealer_button_index = 0
 
     def add_player(self, player):
-        self.total_players.append(player)
+        self.total_players.append(player) # add seat not the player object
         self.active_players.append(player)
 
     def remove_player(self, player):
@@ -25,7 +25,8 @@ class Poker:
         player = self.active_players[player_ix]
         self.pot.amount += player.bet
         player.stack -= player.bet
-        #at some point i have to make bet 0 - ideally next round.
+        player.total_bet += player.bet
+        player.bet = 0
 
     def award_bets(self, player_ix):
         self.active_players[player_ix].stack += self.pot.amount
@@ -35,7 +36,7 @@ class Poker:
         self.pot.amount = 0
         self.deck = Deck()
         self.deck.shuffle()
-        self.active_players = self.total_players
+        self.active_players = self.total_players.copy()
         self.bet_to_match = 0
 
     def run_bet_round(self, player_ix):
