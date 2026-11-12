@@ -7,9 +7,12 @@ class Seat:
         self.hand = []
         self.bet = 0
         self.total_bet = 0
+        self.player.balance -= buy_in
+        self.has_acted = False
+        self.all_in = False
 
     def action(self):
-        decision = int(input("What would you like to do (1: raise, 2: call, 3: check, 4: fold): "))
+        decision = int(input("What would you like to do (1: raise, 2: call, 3: check, 4: fold, 5: all in): "))
         return decision
 
     def leave_table(self):
